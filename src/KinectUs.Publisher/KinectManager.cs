@@ -44,7 +44,9 @@ namespace KinectUs.Publisher
         public void Start()
         {
             _currentSensor.SkeletonStream.Enable();
+            _currentSensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
             _currentSensor.SkeletonFrameReady += (sender, args) => AddToObservableSkeletons(args);
+            _currentSensor.Start();
         }
 
         private void AddToObservableSkeletons(SkeletonFrameReadyEventArgs args)

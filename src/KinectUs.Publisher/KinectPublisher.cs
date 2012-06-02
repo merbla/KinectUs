@@ -50,9 +50,9 @@ namespace KinectUs.Publisher
             _synchroniser = _context.Socket(SocketType.PULL);
             
             _publisher.Bind(Transport.TCP, "*", (uint)_zeroMqPublishPort);
-            _synchroniser.Bind(Transport.TCP, "*", (uint)_zeroMqPullPort);
-
-            _synchroniser.Recv(); 
+            
+            //_synchroniser.Bind(Transport.TCP, "*", (uint)_zeroMqPullPort);
+            //_synchroniser.Recv(); 
 
             _manager.Start();
             _manager.Skeletons
@@ -69,7 +69,7 @@ namespace KinectUs.Publisher
         private void OnNextSkeletons(IEnumerable<Skeleton> skeletons)
         {
             //publish on ZeroMq
-            _publisher.Send(skeletons.Count().ToString() , Encoding.Unicode);
+            _publisher.Send(string.Format("Number of Skeletons is {0}", skeletons.Count().ToString()) , Encoding.Unicode);
         }
     } 
 }

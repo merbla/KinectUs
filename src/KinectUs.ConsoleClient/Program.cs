@@ -22,8 +22,8 @@ namespace KinectUs.ConsoleClient
                     subscriber.Subscribe("", Encoding.Unicode);
                     subscriber.Connect(Transport.TCP, "localhost", (uint) settings.ZeroMQSubscribePort);
                     
-                    sync.Connect(Transport.TCP, "localhost", (uint)settings.ZeroMQSubscribePort);
-                    sync.Send("", Encoding.Unicode);
+                   // sync.Connect(Transport.TCP, "localhost", (uint)settings.ZeroMQSubscribePort);
+                   // sync.Send("", Encoding.Unicode);
 
                     string message = "";
                     while (!message.Equals("END"))
