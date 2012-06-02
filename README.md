@@ -4,7 +4,7 @@ KinectUs - A messaging api to spread to love of Kinect via ZeroMQ
 Authors
 -------
 
-* [Matthew Erbs](http://merbla.com)
+* [Matthew Erbs](http://merbla.com) Tw
 
 
 Kinect Us
@@ -13,9 +13,17 @@ The Kinect is an awesome piece of kit, however it has mainly been reserved for t
 to open its connectivity to other platforms.
 
 
+Requirements/Dependencies
+-------------------------
+You will need the Kinect SDK (v1.5) and the Speech SDK (v11) from [Kinect for Windows](http://www.microsoft.com/en-us/kinectforwindows/develop/developer-downloads.aspx) 
+
+
 Planned Features
 ----------------
 
+* Simple JSON string messages
+* ProtoBuf or MsgPack messages for performance
+* JSON structures for Colour
 * JSON structures for Depth
 * JSON structures for Audio
 * JSON structures for Skeleton
@@ -23,7 +31,7 @@ Planned Features
 Future Features
 ---------------
 
-* Suggestions....
+* Suggestions??
 
 Example of JSON data
 --------------------
