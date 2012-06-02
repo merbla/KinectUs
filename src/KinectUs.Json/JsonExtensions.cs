@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using KinectUs.Core.Structures;
-using ServiceStack.Text;
+using Newtonsoft.Json;
+using JsonSerializer = ServiceStack.Text.JsonSerializer;
 
 namespace KinectUs.Json
 {
@@ -20,18 +21,16 @@ namespace KinectUs.Json
 
         public  static string ToJson(this Microsoft.Kinect.Joint joint)
         {
-            var json = JsonSerializer.SerializeToString<Microsoft.Kinect.Joint>(joint);
+            //var json = JsonSerializer.SerializeToString()<Microsoft.Kinect.Joint>(joint);
+
+            var json = JsonConvert.SerializeObject(joint, Formatting.Indented);
             return json;
         }
 
         public static string ToJson(this Microsoft.Kinect.JointCollection joints)
         {
-            var jointsAsJson = new List<string>();
-            foreach (Microsoft.Kinect.Joint joint in joints)
-            {
-                jointsAsJson.Add(joint.ToJson());
-            }
-            return JsonSerializer.SerializeToString(jointsAsJson);
+            var json = JsonConvert.SerializeObject(joints, Formatting.Indented);
+            return json;
         }
     }
 }
