@@ -1,6 +1,7 @@
 ﻿using System;
 using KinectUs.ConsoleHost.Properties;
 using KinectUs.Publisher;
+using ZMQ;
 
 namespace KinectUs.ConsoleHost
 {
@@ -13,7 +14,16 @@ namespace KinectUs.ConsoleHost
 
             using (var kinectManager = new KinectManager())
             {
-                using (IKinectPublisher publisher = new KinectPublisher(kinectManager, settings.ZeroMQPublishPort, settings.ZeroMqTransport, settings.NumberOfZeroMQThreads, settings.ZeroMqPullPort))
+                var publisherConfiguration = new PublisherConfiguration
+                                                 {
+                                                     JsonPublishPort = settings.ZeroMQJsonPublishPort,
+                                                     NumberOfThreads = settings.NumberOfZeroMQThreads,
+                                                     Transport = Transport.TCP,
+                                                     ProtoBufPublishPort = settings.ZeroMQProtoBufPublishPort
+                                                 };
+
+
+                using (IKinectPublisher publisher = new KinectPublisher(kinectManager, publisherConfiguration))
                 {
                     publisher.Start();
                     Console.WriteLine("Press Enter to exit....");

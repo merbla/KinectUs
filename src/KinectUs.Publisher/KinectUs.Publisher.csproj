@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IPublisherConfiguration.cs" />
     <Compile Include="KinectManager.cs" />
     <Compile Include="KinectPublisher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublisherConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="libzmq.dll">

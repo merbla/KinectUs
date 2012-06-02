@@ -21,21 +21,15 @@ namespace KinectUs.Publisher
     public class KinectPublisher : IKinectPublisher
     {
         private readonly IKinectManager _manager;
-        private readonly int _zeroMqPublishPort;
-        private readonly string _zeroMqTransport;
-        private readonly int _zeroMqThreads;
-        private readonly int _zeroMqPullPort;
+        private readonly IPublisherConfiguration _configuration;
         private Context _context;
         private Socket _publisher;
         private Socket _synchroniser;
 
-        public KinectPublisher(IKinectManager manager, int zeroMqPublishPort, string zeroMqTransport, int zeroMqThreads, int zeroMqPullPort)
+        public KinectPublisher(IKinectManager manager, IPublisherConfiguration configuration)
         {
             _manager = manager;
-            _zeroMqPublishPort = zeroMqPublishPort;
-            _zeroMqTransport = zeroMqTransport;
-            _zeroMqThreads = zeroMqThreads;
-            _zeroMqPullPort = zeroMqPullPort;
+            _configuration = configuration;
         }
 
         public void Dispose()
@@ -48,11 +42,11 @@ namespace KinectUs.Publisher
 
         public void Start()
         {
-            _context = new Context(_zeroMqThreads);
+            _context = new Context(_configuration.NumberOfThreads);
             _publisher = _context.Socket(SocketType.PUB);
             _synchroniser = _context.Socket(SocketType.PULL);
             
-            _publisher.Bind(Transport.TCP, "*", (uint)_zeroMqPublishPort);
+            _publisher.Bind(_configuration.Transport, "*", _configuration.JsonPublishPort);
             
             //_synchroniser.Bind(Transport.TCP, "*", (uint)_zeroMqPullPort);
             //_synchroniser.Recv(); 
@@ -80,5 +74,5 @@ namespace KinectUs.Publisher
         {
             _publisher.Send(skeletons.ToJsonPretty(), Encoding.Unicode);
         }
-    } 
+    }
 }

@@ -25,15 +25,6 @@ namespace KinectUs.ConsoleHost.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("5560")]
-        public int ZeroMQPublishPort {
-            get {
-                return ((int)(this["ZeroMQPublishPort"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int NumberOfZeroMQThreads {
             get {
@@ -53,9 +44,27 @@ namespace KinectUs.ConsoleHost.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5561")]
-        public int ZeroMqPullPort {
+        public uint ZeroMqPullPort {
             get {
-                return ((int)(this["ZeroMqPullPort"]));
+                return ((uint)(this["ZeroMqPullPort"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5562")]
+        public uint ZeroMQJsonPublishPort {
+            get {
+                return ((uint)(this["ZeroMQJsonPublishPort"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5563")]
+        public uint ZeroMQProtoBufPublishPort {
+            get {
+                return ((uint)(this["ZeroMQProtoBufPublishPort"]));
             }
         }
     }

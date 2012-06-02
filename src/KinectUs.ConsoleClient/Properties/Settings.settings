@@ -6,7 +6,7 @@
       <Value Profile="(Default)">5560</Value>
     </Setting>
     <Setting Name="ZeroMqPushPort" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">5561</Value>
+      <Value Profile="(Default)">5562</Value>
     </Setting>
     <Setting Name="NumberOfZeroMQThreads" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">1</Value>
