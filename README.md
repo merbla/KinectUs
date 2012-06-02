@@ -4,7 +4,7 @@ KinectUs - A messaging api to spread to love of Kinect via ZeroMQ
 Authors
 -------
 
-* [Matthew Erbs](http://merbla.com) Tw
+* [Matthew Erbs](http://merbla.com) on [Twitter](http://twitter.com/#!/matthewerbs)
 
 
 Kinect Us

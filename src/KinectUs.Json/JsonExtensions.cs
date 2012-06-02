@@ -8,18 +8,6 @@ namespace KinectUs.Json
 {
     public static class JsonExtensions
     {
-        //public static string ToJson(this SkeletonFrameData skeleton)
-        //{
-        //    var json = JsonSerializer.SerializeToString(skeleton);
-        //    return json;
-        //}
-
-        //public static string ToJson(this Microsoft.Kinect.Skeleton skeleton)
-        //{
-        //    var json = JsonSerializer.SerializeToString(skeleton);
-        //    return json;
-        //}
-
         public  static string ToJson(this Microsoft.Kinect.Joint joint)
         {
             var json = JsonConvert.SerializeObject(joint, Formatting.Indented, new KinectEnumConverter());
