@@ -8,9 +8,8 @@ namespace KinectUs.Tests.Json
     public class KinectEnumConvertFixture
     {
         [Test]
-        public void T()
+        public void JointTrackingStateIsSerialised()
         {
-
             var j = new Joint {TrackingState = JointTrackingState.Tracked};
 
             var json = j.ToJson();

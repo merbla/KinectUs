@@ -9,7 +9,7 @@ namespace KinectUs.Publisher
 {
     public interface IKinectManager :IDisposable
     {
-        void Start();
+        bool Start();
         Subject<Skeleton[]> Skeletons { get; }
     }
     public class KinectManager : IKinectManager
@@ -41,12 +41,16 @@ namespace KinectUs.Publisher
             _currentSensor.Dispose();
         }
 
-        public void Start()
+        public bool Start()
         {
+            if (_currentSensor == null)
+                return false;
             _currentSensor.SkeletonStream.Enable();
             _currentSensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
             _currentSensor.SkeletonFrameReady += (sender, args) => AddToObservableSkeletons(args);
             _currentSensor.Start();
+
+            return true;
         }
 
         private void AddToObservableSkeletons(SkeletonFrameReadyEventArgs args)

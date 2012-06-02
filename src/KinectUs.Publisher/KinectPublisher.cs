@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using KinectUs.Core.Structures;
 using KinectUs.Json;
 using ZMQ;
@@ -58,10 +59,13 @@ namespace KinectUs.Publisher
             //_synchroniser.Bind(Transport.TCP, "*", (uint)_zeroMqPullPort);
             //_synchroniser.Recv(); 
 
-            _manager.Start();
-            _manager.Skeletons
-                .Select(ss => ss.Where(s => s.TrackingState != SkeletonTrackingState.NotTracked))
-                .Subscribe(OnNextSkeletons, OnNextSkeletonError);
+            if(_manager.Start())
+            {
+                _manager.Skeletons
+                  .Select(ss => ss.Where(s => s.TrackingState != SkeletonTrackingState.NotTracked))
+                  .Subscribe(OnNextSkeletons, OnNextSkeletonError);  
+            }
+            
         }
 
         private void OnNextSkeletonError(Exception exception)
@@ -72,18 +76,7 @@ namespace KinectUs.Publisher
 
         private void OnNextSkeletons(IEnumerable<Skeleton> skeletons)
         {
-            var frames = new List<string>();
-            skeletons.ToList().ForEach(s =>
-                                           {
-                                               //var frame = new SkeletonFrameData();
-
-                                               var x = s.Joints.ToJson();
-                                               _publisher.Send(x, Encoding.Unicode);
-                                           });
-            
-            //publish on ZeroMq
-           // _publisher.Send(string.Format("Number of Skeletons is {0}", skeletons.Count().ToString()) , Encoding.Unicode);
-            
+            _publisher.Send(skeletons.ToJsonPretty(), Encoding.Unicode);
         }
     } 
 }
