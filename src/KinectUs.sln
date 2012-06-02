@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectUs.Json", "KinectUs.J
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectUs.ProtoBuf", "KinectUs.ProtoBuf\KinectUs.ProtoBuf.csproj", "{A4E0F053-7F1C-4C3E-8640-1172860D8985}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2D152839-AF8F-41AF-B8A8-8317D43B7486}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,5 +100,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96708372-8651-467C-BA81-B6FC8675CC52} = {2D152839-AF8F-41AF-B8A8-8317D43B7486}
+		{56884DF1-0F0D-4EF9-B2C6-FD65C051A5CB} = {2D152839-AF8F-41AF-B8A8-8317D43B7486}
 	EndGlobalSection
 EndGlobal

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using KinectUs.Core.Structures;
 using KinectUs.Json;
+using Microsoft.Kinect;
 using ZMQ;
 using Exception = System.Exception;
 using Skeleton = Microsoft.Kinect.Skeleton;
@@ -59,11 +60,15 @@ namespace KinectUs.Publisher
             //_synchroniser.Bind(Transport.TCP, "*", (uint)_zeroMqPullPort);
             //_synchroniser.Recv(); 
 
-            if(_manager.Start())
+            if(_manager.Start() == KinectStatus.Connected)
             {
                 _manager.Skeletons
                   .Select(ss => ss.Where(s => s.TrackingState != SkeletonTrackingState.NotTracked))
                   .Subscribe(OnNextSkeletons, OnNextSkeletonError);  
+            }
+            else
+            {
+                Console.WriteLine("Can't connect to Kinect!");
             }
             
         }
