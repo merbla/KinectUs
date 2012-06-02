@@ -1,6 +1,6 @@
 namespace KinectUs.Core.Structures
 {
-    public struct SkeletonPoint
+    public struct SkeletonPointData
     {
         public float X { get; set; }
         public float Y { get; set; }

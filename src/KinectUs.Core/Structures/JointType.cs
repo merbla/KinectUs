@@ -1,4 +1,4 @@
-﻿namespace KinectUs.Core
+﻿namespace KinectUs.Core.Structures
 {
     public enum JointType
     {

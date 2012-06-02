@@ -65,6 +65,16 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KinectUs.Core\KinectUs.Core.csproj">
+      <Project>{D7770747-A178-4915-B10A-1DB5926B3EE1}</Project>
+      <Name>KinectUs.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KinectUs.Json\KinectUs.Json.csproj">
+      <Project>{184DD698-7F42-4C07-9CDF-EB9B95B63EA9}</Project>
+      <Name>KinectUs.Json</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

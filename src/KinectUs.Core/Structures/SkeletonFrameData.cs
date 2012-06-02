@@ -8,6 +8,6 @@ namespace KinectUs.Core.Structures
         public int FrameNumber { get; set; }
         public int SkeletonArrayLength { get; set; }
         public long Timestamp { get; set; }
-        public Skeleton[] Skeletons { get; set; }
+        public SkeletonData[] SkeletonsData { get; set; }
     }
 }

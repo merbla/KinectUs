@@ -4,9 +4,13 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
-using Microsoft.Kinect;
+using KinectUs.Core.Structures;
+using KinectUs.Json;
 using ZMQ;
 using Exception = System.Exception;
+using Skeleton = Microsoft.Kinect.Skeleton;
+using SkeletonTrackingState = Microsoft.Kinect.SkeletonTrackingState;
+
 
 namespace KinectUs.Publisher
 {
@@ -68,8 +72,18 @@ namespace KinectUs.Publisher
 
         private void OnNextSkeletons(IEnumerable<Skeleton> skeletons)
         {
+            var frames = new List<string>();
+            skeletons.ToList().ForEach(s =>
+                                           {
+                                               //var frame = new SkeletonFrameData();
+
+                                               var x = s.Joints.ToJson();
+                                               _publisher.Send(x, Encoding.Unicode);
+                                           });
+            
             //publish on ZeroMq
-            _publisher.Send(string.Format("Number of Skeletons is {0}", skeletons.Count().ToString()) , Encoding.Unicode);
+           // _publisher.Send(string.Format("Number of Skeletons is {0}", skeletons.Count().ToString()) , Encoding.Unicode);
+            
         }
     } 
 }
