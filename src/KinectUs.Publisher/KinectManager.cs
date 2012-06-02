@@ -15,7 +15,6 @@ namespace KinectUs.Publisher
 
     public class KinectManager : IKinectManager
     {
-        private readonly KinectSensor _kinectSensor;
         private KinectSensorCollection _sensors;
         private KinectSensor _currentSensor;
 
@@ -28,24 +27,24 @@ namespace KinectUs.Publisher
 
         public void Dispose()
         {
-            _currentSensor.Dispose();
+            _sensors.ToList().ForEach(s => s.Dispose());
         }
 
-        public Microsoft.Kinect.KinectStatus Start()
+        public KinectStatus Start()
         {
             _sensors = KinectSensor.KinectSensors;
             if (!_sensors.Any(x => x.Status == KinectStatus.Connected))
             {
                 return KinectStatus.NotReady;
             }
-
-            //At this point assume there is only one sensor
-            _currentSensor = _sensors.First(x => x.Status == KinectStatus.Connected);
-            _currentSensor.SkeletonStream.Enable();
-            _currentSensor.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
-            _currentSensor.SkeletonFrameReady += (sender, args) => AddToObservableSkeletons(args);
-
-            _currentSensor.Start();
+            _sensors.ToList().ForEach(s=>
+                                          {
+                                              
+                                              s.SkeletonStream.Enable();
+                                              //s.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
+                                              s.SkeletonFrameReady += (sender, args) => AddToObservableSkeletons(args);
+                                              s.Start();
+                                          });
 
             return KinectStatus.Connected;
         }

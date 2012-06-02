@@ -13,7 +13,7 @@ using SkeletonTrackingState = Microsoft.Kinect.SkeletonTrackingState;
 
 namespace KinectUs.Publisher
 {
-    public interface IKinectPublisher:IDisposable
+    public interface IKinectPublisher : IDisposable
     {
         void Start();
     }
