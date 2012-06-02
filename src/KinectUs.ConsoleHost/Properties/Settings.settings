@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KinectUs.ConsoleHost.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ZeroMQPublishPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5560</Value>
+    </Setting>
+    <Setting Name="NumberOfZeroMQThreads" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ZeroMqTransport" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">tcp</Value>
+    </Setting>
+    <Setting Name="ZeroMqPullPort" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">5561</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
