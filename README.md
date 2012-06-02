@@ -1,4 +1,4 @@
-KinectUs - A messaging api spreading the of the Kinect via ZeroMQ
+KinectUs - spreading the #awesome of the Kinect via ZeroMQ
 =================================================================
 
 Authors
