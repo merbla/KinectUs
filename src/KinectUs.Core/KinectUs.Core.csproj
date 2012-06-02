@@ -41,18 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Structures\ColorImageFormat.cs" />
-    <Compile Include="Structures\DepthImageFormat.cs" />
-    <Compile Include="Structures\Joint.cs" />
-    <Compile Include="Structures\JointType.cs" />
-    <Compile Include="Structures\FrameEdges.cs" />
-    <Compile Include="Structures\ImageFormat.cs" />
-    <Compile Include="Structures\JointTrackingState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Structures\SkeletonData.cs" />
-    <Compile Include="Structures\SkeletonFrameData.cs" />
-    <Compile Include="Structures\SkeletonPointData.cs" />
-    <Compile Include="Structures\SkeletonTrackingState.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

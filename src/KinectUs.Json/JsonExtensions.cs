@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using KinectUs.Core.Structures;
 using Newtonsoft.Json;
 
 
