@@ -1,5 +1,5 @@
-KinectUs - A api to spread to love of Kinect via ZeroMQ
-=======================================================
+KinectUs - A messaging api to spread to love of Kinect via ZeroMQ
+=================================================================
 
 Authors
 -------

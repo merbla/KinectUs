@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("KinectUs.Console")]
+[assembly: AssemblyTitle("KinectUs.ConsoleClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("KinectUs.Console")]
+[assembly: AssemblyProduct("KinectUs.ConsoleClient")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("a4e52d18-ad6c-4808-984e-3cab96c33ea0")]
+[assembly: Guid("f996013d-c697-4887-a5e0-3be359aadaf6")]
 
 // Version information for an assembly consists of the following four values:
 //

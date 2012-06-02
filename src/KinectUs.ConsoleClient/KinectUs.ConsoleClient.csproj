@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B11B6B59-77C0-4249-86CA-CC19423A896F}</ProjectGuid>
+    <ProjectGuid>{56884DF1-0F0D-4EF9-B2C6-FD65C051A5CB}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KinectUs.Console</RootNamespace>
-    <AssemblyName>KinectUs.Console</AssemblyName>
+    <RootNamespace>KinectUs.ConsoleClient</RootNamespace>
+    <AssemblyName>KinectUs.ConsoleClient</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="clrzmq">
+      <HintPath>..\packages\clrzmq-x64.2.2.3\lib\clrzmq.dll</HintPath>
+    </Reference>
+    <Reference Include="clrzmq-ext">
+      <HintPath>..\packages\clrzmq-x64.2.2.3\lib\clrzmq-ext.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,15 +52,24 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KinectUs.Publisher\KinectUs.Publisher.csproj">
-      <Project>{5B17695F-71AD-4390-953F-9A8D69862571}</Project>
-      <Name>KinectUs.Publisher</Name>
-    </ProjectReference>
+    <None Include="libzmq.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
