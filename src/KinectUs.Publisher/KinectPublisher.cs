@@ -75,7 +75,7 @@ namespace KinectUs.Publisher
 
         private void OnNextSkeletons(IEnumerable<Skeleton> skeletons)
         {
-            _jsonPublisher.Send(skeletons.ToJsonPretty(), Encoding.Unicode);
+            _jsonPublisher.Send(skeletons.ToJson(), Encoding.Unicode);
         }
     }
 }

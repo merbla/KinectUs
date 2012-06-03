@@ -10,7 +10,7 @@ namespace KinectUs.ConsoleClient
     {
         static void Main(string[] args)
         {
-
+            var manager = new JsonGestureManager();
             var settings = ConsoleClient.Properties.Settings.Default;
 
             using (var context = new Context(1))
@@ -29,7 +29,9 @@ namespace KinectUs.ConsoleClient
                     while (!message.Equals("END"))
                     {
                         message = subscriber.Recv(Encoding.Unicode);
-                        Console.WriteLine(message);
+                        manager.AddMessage(message);
+                        
+                        //Console.WriteLine(message);
                     }
                 }
             }
