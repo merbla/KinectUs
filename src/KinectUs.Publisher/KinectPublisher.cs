@@ -23,8 +23,9 @@ namespace KinectUs.Publisher
         private readonly IKinectManager _manager;
         private readonly IPublisherConfiguration _configuration;
         private Context _context;
-        private Socket _publisher;
+        private Socket _jsonPublisher;
         private Socket _synchroniser;
+        private Socket _protoBufPublisher;
 
         public KinectPublisher(IKinectManager manager, IPublisherConfiguration configuration)
         {
@@ -35,7 +36,7 @@ namespace KinectUs.Publisher
         public void Dispose()
         {
             _manager.Dispose();
-            _publisher.Dispose();
+            _jsonPublisher.Dispose();
             _synchroniser.Dispose();
             _context.Dispose();
         }
@@ -43,10 +44,12 @@ namespace KinectUs.Publisher
         public void Start()
         {
             _context = new Context(_configuration.NumberOfThreads);
-            _publisher = _context.Socket(SocketType.PUB);
+            _jsonPublisher = _context.Socket(SocketType.PUB);
+            _protoBufPublisher = _context.Socket(SocketType.PUB);
             _synchroniser = _context.Socket(SocketType.PULL);
             
-            _publisher.Bind(_configuration.Transport, "*", _configuration.JsonPublishPort);
+            _jsonPublisher.Bind(_configuration.Transport, "*", _configuration.JsonPublishPort);
+            _protoBufPublisher.Bind(_configuration.Transport, "*", _configuration.ProtoBufPublishPort);
             
             //_synchroniser.Bind(Transport.TCP, "*", (uint)_zeroMqPullPort);
             //_synchroniser.Recv(); 
@@ -72,7 +75,7 @@ namespace KinectUs.Publisher
 
         private void OnNextSkeletons(IEnumerable<Skeleton> skeletons)
         {
-            _publisher.Send(skeletons.ToJsonPretty(), Encoding.Unicode);
+            _jsonPublisher.Send(skeletons.ToJsonPretty(), Encoding.Unicode);
         }
     }
 }
