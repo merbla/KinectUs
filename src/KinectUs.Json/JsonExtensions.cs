@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Kinect;
 using Newtonsoft.Json;
 
 
@@ -36,14 +38,31 @@ namespace KinectUs.Json
 
         public static IEnumerable<Microsoft.Kinect.Skeleton> ToSkeletons(this string json)
         {
+            if (json == "[]")
+            {
+                return new List<Skeleton>();
+            }
             var skeletons = JsonConvert.DeserializeObject<IEnumerable<Microsoft.Kinect.Skeleton>>(json, new KinectEnumConverter());
             return skeletons;
         }
 
         public static Microsoft.Kinect.Skeleton ToSkeleton(this string json)
         {
-            var skeleton = JsonConvert.DeserializeObject<Microsoft.Kinect.Skeleton>(json, new KinectEnumConverter());
-            return skeleton;
+            if (json=="[]")
+            {
+                return null;
+            }
+            try
+            {
+                var skeleton = JsonConvert.DeserializeObject<Microsoft.Kinect.Skeleton>(json, new KinectEnumConverter());
+                return skeleton;
+            }
+            catch (Exception exception)
+            {
+                return null;
+            }
+            
+
         }
 
         public static string ToJsonPretty(this IEnumerable<Microsoft.Kinect.Skeleton> skeletons)

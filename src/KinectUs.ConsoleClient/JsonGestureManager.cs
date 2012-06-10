@@ -14,35 +14,20 @@ namespace KinectUs.ConsoleClient
         public JsonGestureManager()
         {
             Skeletons = new Subject<Skeleton>();
-            _rightHandGesture = new RightHandGesture();
-
-            //Wire up to right hand
-            Skeletons
-                .Where(x => x.TrackingState == SkeletonTrackingState.Tracked)
-                .Select(
-                    x =>
-                    new HandData
-                        {
-                            Time = DateTime.Now,
-                            Position = x.Position,
-                            Joint = x.Joints.First(j => j.JointType == JointType.HandRight)
-                        })
-                .Subscribe(OnNextRightHand, exception => Console.WriteLine(exception.Message));
-        }
-
-        private void OnNextRightHand(HandData obj)
-        {
-            
+            _rightHandGesture = new RightHandGesture(Skeletons);
 
         }
-
 
         public Subject<Skeleton> Skeletons { get; set; }
 
          public void AddMessage(string message)
          {
-             var skeleton = message.ToSkeleton();
-             Skeletons.OnNext(skeleton);
+             var skeleton = message.ToSkeletons();
+             if(skeleton.Any())
+             {
+                 Skeletons.OnNext(skeleton.First());
+             }
+             
          }
     }
 }

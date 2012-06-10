@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
 using Microsoft.Kinect;
 
@@ -17,24 +19,42 @@ namespace KinectUs.ConsoleClient
         public RightHandGesture(Subject<Skeleton> skeletons)
         {
 
-            
             SwipeMinimalLength = 0.4f;
             SwipeMaximalHeight = 0.2f;
-            SwipeMininalDuration = 250;
+            SwipeMininalDuration =  250;
             SwipeMaximalDuration = 1500;
             _skeletons = skeletons;
             _handData = new Subject<HandData>();
-        }
-
-        public RightHandGesture()
-        {
-
             Data = new List<HandData>();
+
+            _skeletons
+                .Where(x=> x != null)
+                //.Where(x => x.TrackingState == SkeletonTrackingState.Tracked)
+                .Select(
+                    x =>
+                    new HandData
+                        {
+                            Time = DateTime.Now,
+                            Position = x.Position,
+                            Joint = x.Joints.First(j => j.JointType == JointType.HandRight)
+                        })
+                .Subscribe(OnNextRightHand, exception => Console.WriteLine(exception.Message));
+
+            //_skeletons
+            //    .Where(x=> x!=null)
+            //    .Subscribe(skeleton => { Console.WriteLine("a");}, exception => { });
         }
 
-        protected List<HandData> Data { get; set; }
+        private void OnNextRightHand(HandData handData)
+        {
+            Data.Add(handData);
+            //Console.WriteLine("New Hand Data");
+            LookForGesture();
+        }
+        
+        public List<HandData> Data { get; set; }
 
-        protected bool ScanPositions(Func<HandData, HandData, bool> heightFunction, Func<HandData, HandData, bool> directionFunction, Func<HandData, HandData, bool> lengthFunction, int minTime, int maxTime)
+        private bool ScanPositions(Func<HandData, HandData, bool> heightFunction, Func<HandData, HandData, bool> directionFunction, Func<HandData, HandData, bool> lengthFunction, int minTime, int maxTime)
         {
             int start = 0;
 
@@ -58,7 +78,26 @@ namespace KinectUs.ConsoleClient
             return false;
         }
 
-        public void LookForGesture()
+        private void DetectGesture()
+        {
+            HandData data = null;
+            foreach (var handData in Data)
+            {
+                if(data ==null)
+                {
+                    data = handData;
+                    break;
+                    
+                }
+                else
+                {
+                   // bool height = Math.Abs(p2.Joint.Position.Y - p1.Joint.Position.Y) < SwipeMaximalHeight;
+                     
+                }
+            }
+        }
+
+        private void LookForGesture()
         {
 
             //from http://kinecttoolkit.codeplex.com/

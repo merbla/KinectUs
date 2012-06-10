@@ -35,9 +35,9 @@ namespace KinectUs.ConsoleClient.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5562")]
-        public int ZeroMqPushPort {
+        public int ZeroMQJsonSubscribePort {
             get {
-                return ((int)(this["ZeroMqPushPort"]));
+                return ((int)(this["ZeroMQJsonSubscribePort"]));
             }
         }
         

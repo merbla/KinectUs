@@ -17,13 +17,14 @@ namespace KinectUs.ConsoleClient
             {
                 using (Socket subscriber = context.Socket(SocketType.SUB), sync = context.Socket(SocketType.PUSH))
                 {
-                    //  Connect our subscriber socket
                     subscriber.StringToIdentity("KinectClient" + Guid.NewGuid().ToString(), Encoding.Unicode);
                     subscriber.Subscribe("", Encoding.Unicode);
-                    subscriber.Connect(Transport.TCP, "localhost", (uint) settings.ZeroMQSubscribePort);
+                    subscriber.Connect(Transport.TCP, "localhost", (uint) settings.ZeroMQJsonSubscribePort);
                     
                    // sync.Connect(Transport.TCP, "localhost", (uint)settings.ZeroMQSubscribePort);
                    // sync.Send("", Encoding.Unicode);
+
+                    Console.WriteLine("Connected to publisher");
 
                     string message = "";
                     while (!message.Equals("END"))

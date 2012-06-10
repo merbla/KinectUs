@@ -43,9 +43,6 @@ namespace KinectUs.Publisher
                                               s.SkeletonStream.Enable();
                                               //s.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
                                               s.SkeletonFrameReady += (sender, args) => AddToObservableSkeletons(args);
-
-                                             
-
                                               s.Start();
                                           });
 

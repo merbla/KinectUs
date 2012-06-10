@@ -26,6 +26,7 @@ namespace KinectUs.ConsoleHost
                 using (IKinectPublisher publisher = new KinectPublisher(kinectManager, publisherConfiguration))
                 {
                     publisher.Start();
+                    Console.WriteLine("Started Kinect");
                     Console.WriteLine("Press Enter to exit....");
                     Console.ReadLine();
                 }
