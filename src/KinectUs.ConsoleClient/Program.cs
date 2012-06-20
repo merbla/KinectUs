@@ -15,12 +15,13 @@ namespace KinectUs.ConsoleClient
 
             using (var context = new Context(1))
             {
-                using (Socket subscriber = context.Socket(SocketType.SUB), sync = context.Socket(SocketType.PUSH))
+                using (Socket jsonSubscriber = context.Socket(SocketType.SUB), sync = context.Socket(SocketType.PUSH))
                 {
-                    subscriber.StringToIdentity("KinectClient" + Guid.NewGuid().ToString(), Encoding.Unicode);
-                    subscriber.Subscribe("", Encoding.Unicode);
-                    subscriber.Connect(Transport.TCP, "localhost", (uint) settings.ZeroMQJsonSubscribePort);
+                    jsonSubscriber.StringToIdentity("KinectClient" + Guid.NewGuid().ToString(), Encoding.Unicode);
+                    jsonSubscriber.Subscribe("", Encoding.Unicode);
+                    jsonSubscriber.Connect(Transport.TCP, "localhost", (uint) settings.ZeroMQJsonSubscribePort);
                     
+                    //TODO: Sync to get send settings etc. data to be published
                    // sync.Connect(Transport.TCP, "localhost", (uint)settings.ZeroMQSubscribePort);
                    // sync.Send("", Encoding.Unicode);
 
@@ -29,10 +30,8 @@ namespace KinectUs.ConsoleClient
                     string message = "";
                     while (!message.Equals("END"))
                     {
-                        message = subscriber.Recv(Encoding.Unicode);
-                        manager.AddMessage(message);
-                        
-                        //Console.WriteLine(message);
+                        message = jsonSubscriber.Recv(Encoding.Unicode);
+                        manager.AddMessage(message); 
                     }
                 }
             }

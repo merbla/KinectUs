@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Kinect;
 
-namespace KinectUs.ConsoleClient
+namespace KinectUs.Core.Models
 {
     public class HandData
     {

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using KinectUs.Core.Models;
 using Microsoft.Kinect;
 
-namespace KinectUs.ConsoleClient
+namespace KinectUs.Core.Gestures
 {
     public class RightHandGesture
     {
