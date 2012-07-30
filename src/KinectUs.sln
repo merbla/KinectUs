@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "KinectUs.FSharp.ConsoleClient", "KinectUs.FSharp.ConsoleClient\KinectUs.FSharp.ConsoleClient.fsproj", "{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,12 +104,23 @@ Global
 		{A4E0F053-7F1C-4C3E-8640-1172860D8985}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A4E0F053-7F1C-4C3E-8640-1172860D8985}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{A4E0F053-7F1C-4C3E-8640-1172860D8985}.Release|x86.ActiveCfg = Release|Any CPU
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Debug|x86.ActiveCfg = Debug|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Debug|x86.Build.0 = Debug|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Release|Any CPU.ActiveCfg = Release|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Release|Mixed Platforms.Build.0 = Release|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Release|x86.ActiveCfg = Release|x86
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{96708372-8651-467C-BA81-B6FC8675CC52} = {2D152839-AF8F-41AF-B8A8-8317D43B7486}
 		{56884DF1-0F0D-4EF9-B2C6-FD65C051A5CB} = {2D152839-AF8F-41AF-B8A8-8317D43B7486}
+		{96708372-8651-467C-BA81-B6FC8675CC52} = {2D152839-AF8F-41AF-B8A8-8317D43B7486}
+		{09060D87-9A88-4C1B-B0E6-0B49B18F02BD} = {2D152839-AF8F-41AF-B8A8-8317D43B7486}
 	EndGlobalSection
 EndGlobal
