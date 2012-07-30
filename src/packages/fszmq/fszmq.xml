@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>fszmq</name></assembly>
+<members>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.Context">
+ <summary> 
+ <para>Represents the container for a group of sockets in a node.</para>
+ <para>Typically, use exactly one context per logical process.</para>
+ </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.Message">
+<summary>
+ Provides a memory-managed wrapper over ZeroMQ message operations.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.PollItem">
+ <summary>
+ For use with the `Polling` module...
+ <para>Associates a callback with a Socket instance and one or more 
+ events, such that the callback is invoked when the event(s) occurs on 
+ the Socket instance</para>
+ <remarks>NOTE: all sockets passed to `Polling.poll` MUST share the 
+ same context and belong to the thread calling `Polling.poll`</remarks>
+ </summary>
+</member>
+<member name="M:fszmq.PollingModule.AsPollOut(fszmq.Socket,System.Action{fszmq.Socket})">
+<summary>
+ Creates a `PollItem` for the socket which will 
+ invoke the callback when the socket receives a message.
+</summary>
+</member>
+<member name="M:fszmq.PollingModule.AsPollIn(fszmq.Socket,System.Action{fszmq.Socket})">
+<summary>
+ Creates a `PollItem` for the socket which will 
+ invoke the callback when the socket receives a message.
+</summary>
+</member>
+<member name="M:fszmq.PollingModule.AsPollIO(fszmq.Socket,System.Action{fszmq.Socket})">
+<summary>
+ Creates a `PollItem` for the socket which will 
+ invoke the callback when the socket receives a message.
+</summary>
+</member>
+<member name="T:fszmq.PollingModule">
+<summary>
+ Utilities for working with `Polling` from C#,VB.NET,etc.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.Socket">
+<summary>
+ An abstraction of an asynchronous message queue, 
+ with the exact queuing semantics depending on the socket type in use.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.Version">
+ <summary>
+ A version of two possible states:
+ <para>a triple of integers for the major revision, minor 
+ revision and patch number</para>
+ <para>or an "Unknown" indicator</para>
+ </summary>
+</member>
+<member name="">
+
+</member>
+<member name="P:fszmq.ZeroMQException.ErrorNumber">
+<summary>
+ the ZeroMQ-defined, or OS-defined, error code reported by ZMQ
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.ZeroMQException">
+ <summary>
+ <para>Represents any error raised by the native ZeroMQ library.</para> 
+ <para>Stores a human-readable summary in the `Message` property.</para>
+ </summary> 
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.C">
+
+</member>
+<member name="M:fszmq.ContextModule.Subscribe(fszmq.Context)">
+ <summary>
+ Creates a subscriber to receive to data distributed by a publisher.
+ <para>Initially a ZMQ.SUB socket is not subscribed to any messages 
+ (i.e. one, or more, subscriptions must be manually applied before 
+ any messages will be received).</para>
+ </summary>
+</member>
+<member name="M:fszmq.ContextModule.Publish(fszmq.Context)">
+<summary>
+ Creates a publisher used to distribute messages to subscribers.
+</summary>
+</member>
+<member name="M:fszmq.ContextModule.Push(fszmq.Context)">
+<summary>
+ Creates a pipeline node to send messages to downstream (PULL) nodes.
+</summary>
+</member>
+<member name="M:fszmq.ContextModule.Pull(fszmq.Context)">
+<summary>
+ Creates a pipeline node to receive messages from upstream (PUSH) nodes.
+</summary>
+</member>
+<member name="M:fszmq.ContextModule.Router(fszmq.Context)">
+ <summary>
+ Creates an advanced socket type used for extending the request/reply 
+ pattern. 
+ <para>When receiving messages a ZMQ.ROUTER socket prepends a 
+ message part containing the identity of the originating peer.</para>
+ <para>When sending messages a ZMQ.ROUTER socket removes the first 
+ part of the message and uses it to determine the identity of 
+ the recipient.</para>
+ </summary>
+</member>
+<member name="M:fszmq.ContextModule.Dealer(fszmq.Context)">
+ <summary>
+ Creates an advanced socket type used for extending the request/reply 
+ pattern.
+ <para>When a ZMQ.DEALER socket is connected to a ZMQ.REP socket,
+ each message sent must consist of an empty message part, the 
+ delimiter, followed by one or more body parts.</para>
+ </summary>
+</member>
+<member name="M:fszmq.ContextModule.Response(fszmq.Context)">
+ <summary>
+ Creates a service to receive requests from and send replies to a 
+ client.
+ <para>This socket type allows only an alternating sequence of 
+ `Socket.recv(reply)` followed by `Socket.send(request)` calls.</para>
+ </summary>
+</member>
+<member name="M:fszmq.ContextModule.Request(fszmq.Context)">
+ <summary>
+ Creates a client for sending requests to and receiving replies from 
+ a service.
+ <para>This socket type allows only an alternating sequence of 
+ `Socket.send(request)` followed by `Socket.recv(reply)` calls.</para>
+ </summary>
+</member>
+<member name="M:fszmq.ContextModule.Pair(fszmq.Context)">
+ <summary>
+ Creates a peer connected to exactly one other peer.
+ <para>This socket type is used primarily for inter-thread 
+ communication across the "inproc" transport.</para>
+ </summary>
+</member>
+<member name="M:fszmq.ContextModule.Socket(fszmq.Context,System.Int32)">
+<summary>
+ Creates a `Socket` within the specified context 
+</summary>
+</member>
+<member name="T:fszmq.ContextModule">
+<summary>
+ Contains methods for working with `Context` instances
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.NativeMemory">
+
+</member>
+<member name="M:fszmq.Polling.PollForever(System.Collections.Generic.IEnumerable{fszmq.PollItem})">
+<summary>
+ Calls `Polling.poll` with the given 
+ sequence of `PollItem` instances and no timeout, 
+ effectively causing the polling loop to block indefinitely.
+</summary>
+</member>
+<member name="M:fszmq.Polling.PollNow(System.Collections.Generic.IEnumerable{fszmq.PollItem})">
+<summary>
+ Calls `Polling.poll` with the given 
+ sequence of `PollItem` instances and 0 microseconds timeout.
+</summary>
+</member>
+<member name="M:fszmq.Polling.Poll(System.Int64,System.Collections.Generic.IEnumerable{fszmq.PollItem})">
+ <summary>
+ Performs a single polling run across the give sequence of 
+ `PollItem` instances, waiting up to the given timeout. 
+ <para>Returns `true` when one or more callbacks have been invoked, 
+ returns `false` otherwise</para>
+ <remarks>NOTE: All items passed to `Polling.poll` MUST share the same
+ context and belong to the thread calling `Polling.poll`</remarks>
+ </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:fszmq.Polling.PollInOut(Microsoft.FSharp.Core.FSharpFunc`2{fszmq.Socket,Microsoft.FSharp.Core.Unit},fszmq.Socket)">
+<summary>
+ Creates a `PollItem` for the socket which will 
+ invoke the callback when the socket sends or receives messages.
+</summary>
+</member>
+<member name="M:fszmq.Polling.PollOut(Microsoft.FSharp.Core.FSharpFunc`2{fszmq.Socket,Microsoft.FSharp.Core.Unit},fszmq.Socket)">
+<summary>
+ Creates a `PollItem` for the socket which will 
+ invoke the callback when the socket sends a message.
+</summary>
+</member>
+<member name="M:fszmq.Polling.PollIn(Microsoft.FSharp.Core.FSharpFunc`2{fszmq.Socket,Microsoft.FSharp.Core.Unit},fszmq.Socket)">
+<summary>
+ Creates a `PollItem` for the socket which will 
+ invoke the callback when the socket receives a message.
+</summary>
+</member>
+<member name="T:fszmq.Polling">
+<summary>
+ Contains methods for working with ZeroMQ&apos;s polling capabilities
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Unsubscribe(fszmq.Socket,System.Collections.Generic.IEnumerable{System.Byte[]})">
+<summary>
+ Removes one subscription for each of the given topics
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Subscribe(fszmq.Socket,System.Collections.Generic.IEnumerable{System.Byte[]})">
+<summary>
+ Adds one subscription for each of the given topics
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.op_GreaterBarLess(fszmq.Socket,fszmq.Socket)">
+<summary>
+ Alias for `Socket.transfer`
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Transfer(fszmq.Socket,fszmq.Socket)">
+<summary>
+ Copies a message part-wise from one socket to another without
+ first marshalling the message part into the managed code space
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.RecvAll(fszmq.Socket)">
+<summary>
+ Retrieves all parts of the next available message
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.HasMore(fszmq.Socket)">
+<summary>
+ Returns true if more message parts are available, false otherwise
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Recv(fszmq.Socket)">
+<summary>
+ Retrieves the next available message part from a socket
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.TryRecv(fszmq.Socket,System.Int32)">
+ <summary>
+ Retrieves the next available message part from a socket, 
+ <para>returning Some(&lt;message&gt;) if successful</para> 
+ <para>or None if it should be re-attempted</para>
+ </summary>
+</member>
+<member name="M:fszmq.SocketModule.SendAll``1(fszmq.Socket,``0)">
+<summary>
+ Sends all parts of a given message
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.op_BarTwiddleGreater(System.Byte[],fszmq.Socket)">
+<summary>
+ Alias for `Socket.sendMore`
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.op_BarGreaterGreater(System.Byte[],fszmq.Socket)">
+<summary>
+ Alias for `Socket.send`
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.op_LessTwiddleBar(fszmq.Socket)">
+<summary>
+ Alias for `Socket.sendMore`
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.op_LessLessBar(fszmq.Socket)">
+<summary>
+ Alias for `Socket.send`
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.SendMore(fszmq.Socket,System.Byte[])">
+<summary>
+ Sends a message part, indicating more parts will follow
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Send(fszmq.Socket,System.Byte[])">
+<summary>
+ Sends a message part, indicating no more parts will follow
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="M:fszmq.SocketModule.TrySend(fszmq.Socket,System.Int32,System.Byte[])">
+ <summary>
+ Sends a message part, with the given flags, 
+ <para>returning true if successful</para>
+ <para>or false if the send should be re-tried</para>
+ </summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:fszmq.SocketModule.ApplyOption``1(System.Int32,``0,fszmq.Socket)">
+<summary>
+ Assigns a value to the given ZeroMQ socket option, 
+ returning updated socket instance
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.SetOption``1(fszmq.Socket,System.Int32,``0)">
+<summary>
+ Assigns a value to the given ZeroMQ socket option
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.GetOption``1(fszmq.Socket,System.Int32)">
+<summary>
+ Retrieves the value of the given ZeroMQ socket option
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Connect(fszmq.Socket,System.String)">
+<summary>
+ Connects to an endpoint at the given address
+</summary>
+</member>
+<member name="M:fszmq.SocketModule.Bind(fszmq.Socket,System.String)">
+<summary>
+ Initializes an endpoint for accepting connections
+</summary>
+</member>
+<member name="T:fszmq.SocketModule">
+<summary>
+ Contains methods for working with `Socket` instances
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:fszmq.ZMQ.TYPE">
+<summary>
+ (Int32) Socket type
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.EVENTS">
+<summary>
+ (UInt32) Socket event state, see also: `Polling`
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.FD">
+<summary>
+ (NativeInt) File descriptor associated with socket
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.RECONNECT_IVL_MAX">
+<summary>
+ (Int32) Total reconnect pause milliseconds
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.RECOVERY_IVL_MSEC">
+<summary>
+ (Int64) Multicast recovery milliseconds
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.BACKLOG">
+<summary>
+ (Int32) Maximum outstanding queued peers
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.RECONNECT_IVL">
+<summary>
+ (Int32) Reconnect pause milliseconds
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.LINGER">
+<summary>
+ (Int32) Shutdown linger milliseconds
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.RCVBUF">
+<summary>
+ (UInt64) Receive buffer bytes
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.SNDBUF">
+<summary>
+ (UInt64) Transmit buffer bytes
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.MCAST_LOOP">
+<summary>
+ (Int64) Multicast loop-back (yes or no)
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.RECOVERY_IVL">
+<summary>
+ (Int64) Multicast recovery seconds 
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.RATE">
+<summary>
+ (Int64) Multicast data rate seconds
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.UNSUBSCRIBE">
+<summary>
+ (Byte[]) Drop subscription filter
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.SUBSCRIBE">
+<summary>
+ (Byte[]) Add subscription filter
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.IDENTITY">
+<summary>
+ (Byte[]) Identity
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.AFFINITY">
+<summary>
+ (UInt64) I/O thread affinity bit-mask
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.SWAP">
+<summary>
+ (Int64) Swap-disk bytes
+</summary>
+</member>
+<member name="P:fszmq.ZMQ.HWM">
+<summary>
+ (UInt64) &quot;High-water mark&quot; message count
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="P:fszmq.ZMQ.Version">
+<summary>
+ Version of the native ZeroMQ library
+</summary>
+</member>
+<member name="T:fszmq.ZMQ">
+<summary>
+ Contains commonly-used pre-defined ZeroMQ values
+</summary>
+</member>
+</members>
+</doc>

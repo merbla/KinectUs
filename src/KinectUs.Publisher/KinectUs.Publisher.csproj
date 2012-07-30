@@ -31,11 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="clrzmq">
-      <HintPath>..\packages\clrzmq-x64.2.2.3\lib\clrzmq.dll</HintPath>
+    <Reference Include="clrzmq, Version=2.2.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\clrzmq-x64.2.2.5\lib\clrzmq.dll</HintPath>
     </Reference>
-    <Reference Include="clrzmq-ext">
-      <HintPath>..\packages\clrzmq-x64.2.2.3\lib\clrzmq-ext.dll</HintPath>
+    <Reference Include="clrzmq-ext, Version=2.2.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\clrzmq-x64.2.2.5\lib\clrzmq-ext.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Kinect, Version=1.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -59,11 +59,6 @@
     <Compile Include="PublisherConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="libzmq.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,6 +70,9 @@
       <Project>{184DD698-7F42-4C07-9CDF-EB9B95B63EA9}</Project>
       <Name>KinectUs.Json</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="libzmq.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

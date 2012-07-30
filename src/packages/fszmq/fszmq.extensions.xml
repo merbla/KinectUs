@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+<assembly><name>fszmq.extensions</name></assembly>
+<members>
+<member name="M:fszmq.Devices.Queue(fszmq.Socket,fszmq.Socket)">
+<summary>
+ Queue is a generic request-reply broker
+</summary>
+</member>
+<member name="M:fszmq.Devices.Forwarder(fszmq.Socket,fszmq.Socket)">
+<summary>
+ Forwarder is a pub-sub proxy server
+</summary>
+</member>
+<member name="M:fszmq.Devices.Streamer(fszmq.Socket,fszmq.Socket)">
+<summary>
+ Streamer is a push-pull proxy server
+</summary>
+</member>
+<member name="M:fszmq.Devices.Create(System.Int32,fszmq.Socket,fszmq.Socket)">
+<summary>
+ Starts a built-in ZMQ device running in the current thread 
+ and returns only if/when the associated context is closed.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.Devices">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="M:fszmq.extensions.Server.Start(fszmq.Context,Microsoft.FSharp.Core.FSharpFunc`2{System.Threading.CancellationToken,Microsoft.FSharp.Core.FSharpFunc`2{System.Byte[][],System.Byte[][]}},System.String)">
+<summary>
+ Starts a basic router server, bound to the given address, 
+ which runs the provided callback as a separate async workflow 
+ per-incoming-request (or per-incoming-dealer)
+</summary>
+</member>
+<member name="M:fszmq.extensions.Server.Start">
+<summary>
+ Starts a basic router server, binding to the Address property
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.extensions.Server">
+<summary>
+ A basic router server, which runs the provided callback as a 
+ separate async workflow per-incoming-request (or per-incoming-dealer)
+</summary>
+</member>
+<member name="M:fszmq.extensions.ServerModule.StartServer(fszmq.Context,System.String,System.Func{System.Threading.CancellationToken,System.Byte[][],System.Byte[][]})">
+<summary>
+ Starts a basic router server, bound to the given address,
+ which runs the provided callback as a separate async workflow 
+ per-incoming-request (or incoming per-incoming-dealer)
+</summary>
+</member>
+<member name="T:fszmq.extensions.ServerModule">
+<summary>
+ Utilities for working with `Server` from C#,VB.NET,etc.
+</summary>
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="">
+
+</member>
+<member name="T:fszmq.extensions.C">
+
+</member>
+</members>
+</doc>

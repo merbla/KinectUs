@@ -36,10 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="clrzmq, Version=2.2.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\clrzmq-x64.2.2.3\lib\clrzmq.dll</HintPath>
+      <HintPath>..\packages\clrzmq-x64.2.2.5\lib\clrzmq.dll</HintPath>
     </Reference>
-    <Reference Include="clrzmq-ext">
-      <HintPath>..\packages\clrzmq-x64.2.2.3\lib\clrzmq-ext.dll</HintPath>
+    <Reference Include="clrzmq-ext, Version=2.2.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\clrzmq-x64.2.2.5\lib\clrzmq-ext.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,16 +66,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="libzmq.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Content Include="libzmq.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
