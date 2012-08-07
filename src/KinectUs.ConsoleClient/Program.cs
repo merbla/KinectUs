@@ -32,6 +32,9 @@ namespace KinectUs.ConsoleClient
                     {
                         message = jsonSubscriber.Recv(Encoding.Unicode);
                         manager.AddMessage(message); 
+#if DEBUG
+                        Console.WriteLine(message);
+#endif
                     }
                 }
             }

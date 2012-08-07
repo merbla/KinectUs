@@ -77,7 +77,11 @@ namespace KinectUs.Publisher
         {
             var message = skeletons.ToJson();
             _jsonPublisher.Send(message, Encoding.Unicode);
-            //Console.WriteLine("Published Skeleton");
+            
+#if DEBUG
+            Console.WriteLine("Published Skeleton");
+#endif
+            
         }
     }
 }
