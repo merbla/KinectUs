@@ -1,104 +1,74 @@
-﻿
-
-module KinectUs.FSharp
+﻿module KinectUs.FSharp
 
 open fszmq
 open fszmq.Context
 open fszmq.Socket
 
-[<RequireQualifiedAccess>]
-module Array = 
-  let    last (a:'r array) =  a.[a.Length - 1]
-  let tryLast (a:'r array) =  match a.Length with
-                              | n when n > 0  ->  Some a.[n - 1]
-                              | _             ->  None
 
-exception BadFraming 
 
-let [<Literal>] EXIT_SUCCESS =  0
-let [<Literal>] EXIT_FAILURE = -1
+[<AutoOpen>]
+module private Utilities =
 
-let srandom ()  = System.Random(System.DateTime.Now.Millisecond)
-let private rnd = srandom() // for use by ``s_setID``
+  (* timing functions *)
+  open System.Runtime.InteropServices
 
-let encode (s:string) = System.Text.Encoding.ASCII.GetBytes(s)
-let decode = System.Text.Encoding.ASCII.GetString
-let s_send socket s = s |> encode |> send socket
-let s_sendmore socket s = s |> encode |> sendMore socket |> ignore
-let s_recv socket = socket |> recv |> decode
+  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
+  extern nativeint zmq_stopwatch_start()
+  
+  [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
+  extern uint32 zmq_stopwatch_stop(nativeint watch)
 
-let printf'  fmt = Printf.kprintf System.Console.Write     fmt
-let printfn' fmt = Printf.kprintf System.Console.WriteLine fmt
+  (* program return codes *)
+  let [<Literal>] OKAY = 0
+  let [<Literal>] FAIL = 3
 
-let scanln = System.Console.ReadLine
-let fflush = System.Console.Out.Flush
+  (* I/O helpers *)
+  let scanln = System.Console.ReadLine
+  let encode = string >> System.Text.Encoding.ASCII.GetBytes
+  let decode = System.Text.Encoding.ASCII.GetString
 
-let sleep (n:int) = System.Threading.Thread.Sleep(n)
+  let prompt msg = 
+    printf "%s " msg
+    scanln ()
 
-let s_clock_start = System.Diagnostics.Stopwatch.StartNew
-let s_clock_stop (sw:System.Diagnostics.Stopwatch) = 
-  sw.Stop()
-  sw.ElapsedMilliseconds
-
-let (|IsChar|IsByte|) = function
-    | b when b < 32uy || b > 127uy  -> IsByte(b)
-    | c (* is an ASCII character *) -> IsChar(char c)
+[<EntryPoint>]
+let main args = 
+  let result = ref OKAY
+  try
+    use context = new Context(1)
     
-let dumpFrame prefix frame =
-  prefix |> Option.fold (fun _ p -> printf' "%s" p) ()
-  printf' "[%03d] " (frame |> Array.length)
-  let lim = min frame.Length 70
-  frame.[ .. (lim - 1)]
-  |> Array.iter (function IsChar c -> printf' "%c"   c
-                        | IsByte b -> printf' "%02X" b)
-  printfn' ""
+    // first, connect our subscriber socket
+    use subscriber = sub context
+    "tcp://localhost:5561" |> connect subscriber
+    [ ""B ] |> subscribe subscriber
+    
+    // second, synchronize with publisher
+    use syncclient = req context
+    "tcp://localhost:5562" |> connect syncclient
 
-let dumpMsg msg =
-  printfn' "----------------------------------------"
-  match msg with
-  | null 
-  | [||] -> printfn' "<NULL>"
-  | msg' -> let lim = min msg'.Length 10
-            let dumpFrame' = dumpFrame None
-            msg'.[ .. (lim - 1)] |> Array.iter dumpFrame'
+    // - send a synchronization request
+    "" |> encode |>> syncclient   
 
-let s_dump socket =
-  printfn' "----------------------------------------"
-  socket |> recvAll |> dumpMsg
+    printfn "Sent Sync" 
+    // - wait for synchronization reply
+    syncclient |> recv |> ignore
 
-let s_setID socket = 
-  let identity = sprintf "%04X-%04X" 
-                         (rnd.Next(0,0x10000)) 
-                         (rnd.Next(0,0x10000))
-                 |> encode
-  (ZMQ.IDENTITY,identity) |> set socket
-
-let t_spawn fn = 
-  let t = System.Threading.Thread(System.Threading.ThreadStart fn)
-  t.Start()
-  t
-
-let t_spawnp fn p = 
-  let fn' = System.Threading.ParameterizedThreadStart fn
-  let t = System.Threading.Thread(fn')
-  t.Start(p)
-  t
-
-
-
-
-//#load "zhelpers.fs"
-
-let main () = 
-  use context = new Context(1)
-
-
-
-
-
-  EXIT_SUCCESS
-   
-main ()
-
-
-
+    // third, get our updates and report how many we got
+    let rec loop count =
+        let reply = subscriber|> recv |> decode
+        printf "%d" count
+        if  reply <> "END" 
+            then loop (count + 1)
+            else count
+                
+    let update_nbr = loop 0
+    printfn "Received %d updates" update_nbr
+    
+     
+  with
+  | x ->  result := FAIL
+          printfn "FAIL: %s" x.Message
+            
+  printf "press <return> to exit... "
+  scanln () |> ignore
+  exit !result
