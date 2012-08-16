@@ -11,6 +11,7 @@ module private Utilities =
 
   (* timing functions *)
   open System.Runtime.InteropServices
+  open System.Configuration
 
   [<DllImport("libzmq",CallingConvention=CallingConvention.Cdecl)>]
   extern nativeint zmq_stopwatch_start()
@@ -26,6 +27,10 @@ module private Utilities =
   let scanln = System.Console.ReadLine
   let encode = string >> System.Text.Encoding.ASCII.GetBytes
   let decode = System.Text.Encoding.ASCII.GetString
+
+  let subscriberPort = System.Configuration.ConfigurationManager.AppSettings.["ZeroMQJsonSubscribePort"]
+  let syncPort = System.Configuration.ConfigurationManager.AppSettings.["ZeroMQSyncPort"]
+  //let ZeroMQSyncPort 
 
   let prompt msg = 
     printf "%s " msg
