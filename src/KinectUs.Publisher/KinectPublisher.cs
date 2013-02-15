@@ -79,7 +79,7 @@ namespace KinectUs.Publisher
             _jsonPublisher.Send(message, Encoding.Unicode);
             
 #if DEBUG
-            Console.WriteLine("Published Skeleton");
+           // Console.WriteLine("Published Skeleton");
 #endif
             
         }

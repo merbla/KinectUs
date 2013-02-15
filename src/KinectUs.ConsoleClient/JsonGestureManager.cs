@@ -24,10 +24,8 @@ namespace KinectUs.ConsoleClient
         public void AddMessage(string message)
         {
             var skeleton = message.ToSkeletons();
-            if (skeleton.Any())
-            {
-                Skeletons.OnNext(skeleton.First());
-            }
+
+            skeleton.ToList().ForEach(s => Skeletons.OnNext(s));
         }
     }
 

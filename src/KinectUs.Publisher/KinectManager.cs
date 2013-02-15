@@ -33,7 +33,7 @@ namespace KinectUs.Publisher
         public KinectStatus Start()
         {
             _sensors = KinectSensor.KinectSensors;
-            if (!_sensors.Any(x => x.Status == KinectStatus.Connected))
+            if (_sensors.All(x => x.Status != KinectStatus.Connected))
             {
                 return KinectStatus.NotReady;
             }
