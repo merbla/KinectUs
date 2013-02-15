@@ -28,21 +28,42 @@ namespace KinectUs.ConsoleClient
                    // sync.Connect(Transport.TCP, "localhost", (uint)settings.ZeroMQSubscribePort);
                    // sync.Send("", Encoding.Unicode);
 
-                    var throttled = manager.Skeletons;
-                       //.Throttle(TimeSpan.FromSeconds(3));
+                    var throttled = manager.Skeletons
+                       .Throttle(TimeSpan.FromSeconds(3));
 
-                    var joints = manager
+                    var trackedJoints = manager
                         .Skeletons
-                        .SelectMany(x=> x.Joints);
+                        .SelectMany(x=> x.Joints.Where(t=> t.TrackingState != JointTrackingState.NotTracked));
 
                     var leftAndRightHands =
-                        joints.Where(j => j.JointType == JointType.HandLeft || j.JointType == JointType.HandRight);
+                        trackedJoints.Where(j => j.JointType == JointType.HandLeft || j.JointType == JointType.HandRight);
 
-                    throttled.Subscribe(skeleton =>
+                    manager.Skeletons.Subscribe(skeleton =>
                         {
-                            Console.WriteLine("LeftHand " + skeleton.LeftHand().Position.X);
-                            Console.WriteLine("Right Hand" + skeleton.RightHand().Position.X);
+                            if (skeleton.TrackingState == SkeletonTrackingState.Tracked
+                                && skeleton.LeftHand().TrackingState != JointTrackingState.NotTracked
+                                && skeleton.RightHand().TrackingState != JointTrackingState.NotTracked
+                                
+                                
+                                
+                                )
+                            {
+                                Console.WriteLine("LeftHand " + skeleton.LeftHand().Position.X);
+                                Console.WriteLine("Right Hand" + skeleton.RightHand().Position.X);
+                            }
+                            
                         });
+
+
+                    manager.Skeletons.Subscribe(skeleton =>
+                    {
+                        if (skeleton.TrackingState == SkeletonTrackingState.Tracked)
+                        {
+                           Console.WriteLine("Tracked");
+                        }
+
+                    });
+
 
                     manager.Skeletons
                         .Where(x => x.LeftHand().Position.X > x.RightHand().Position.X)
